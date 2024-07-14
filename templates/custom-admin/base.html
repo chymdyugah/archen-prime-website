@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A">
+  <meta name="author" content="CodeGarageAfrica, Chymdy">
+  <meta name="keyword" content="LASPPPA, Chymdy, Lagos, CGA, CodeGarageAfrica, Ugah">
+  
+  {% load static %}
+  <link rel="shortcut icon" href="{% static 'custom-admin/img/favicon.png' %}">
+
+  {% block title %}{% endblock %}
+
+  <!-- Bootstrap CSS -->
+  <link href="{% static 'custom-admin/css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- bootstrap theme -->
+  <link href="{% static 'custom-admin/css/bootstrap-theme.css' %}" rel="stylesheet">
+  <!--external css-->
+  <!-- font icon -->
+  <link href="{% static 'custom-admin/css/elegant-icons-style.css' %}" rel="stylesheet" />
+  <link href="{% static 'custom-admin/css/font-awesome.min.css' %}" rel="stylesheet" />
+  <!-- pnotify -->
+  <link href="{% static 'custom-admin/assets/pnotify/pnotify.custom.css' %}" rel="stylesheet" />
+  <!-- Custom styles -->
+  <link href="{% static 'custom-admin/css/style.css' %}" rel="stylesheet">
+  <link href="{% static 'custom-admin/css/style-responsive.css' %}" rel="stylesheet" />
+
+  
+  {% block css %}{% endblock %}
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+  <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+      <script src="js/lte-ie7.js"></script>
+    <![endif]-->
+
+    <!-- =======================================================
+      Theme Name: NiceAdmin
+      Theme URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+      Author: BootstrapMade
+      Author URL: https://bootstrapmade.com
+    ======================================================= -->
+</head>
+
+<body>
+  <!-- container section start -->
+  <section id="container" class="">
+    <!--header start-->
+
+    <header class="header dark-bg">
+      <div class="toggle-nav">
+        <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
+      </div>
+
+      <!--logo start-->
+      <a href="" class="logo">Archen <span class="lite">Prime</span></a>
+      <!--logo end-->
+
+      <div class="top-nav notification-row">
+        <!-- notificatoin dropdown start-->
+        <ul class="nav pull-right top-menu">
+
+          <!-- user login dropdown start-->
+          <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              <span class="username">{{request.user.username}}</span>
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu extended logout">
+              <div class="log-arrow-up"></div>
+              <li class="eborder-top">
+                <a href="{% url 'home' %}"> See Website</a>
+              </li>
+              <li class="eborder-top">
+                <a href="{% url 'logout' %}"><i class="icon_key_alt"></i> Log Out</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <!-- notificatoin dropdown end-->
+      </div>
+    </header>
+    <!--header end-->
+
+    <!--sidebar start-->
+    <aside>
+      <div id="sidebar" class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu">
+          <li class="">
+            <a class="" href="{% url 'all_projects' %}">
+              <i class="icon_house_alt"></i>
+              <span>Home</span>
+            </a>
+          </li>
+          <li class="">
+            <a class="" href="{% url 'add_project' %}">
+              <i class="icon_document_alt"></i>
+              <span>New Project</span>
+            </a>
+          </li>
+
+        </ul>
+        <!-- sidebar menu end-->
+      </div>
+    </aside>
+    <!--sidebar end-->
+
+    <!--main content start-->
+    {% block body %}
+    
+    {% endblock %}
+    <!--main content end-->
+    <div class="text-right">
+      <div class="credits">
+          <!--
+            All the links in the footer should remain intact.
+            You can delete the links only if you purchased the pro version.
+            Licensing information: https://bootstrapmade.com/license/
+            Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
+          -->
+          Brought alive by <a href="https://codegarage.africa/" target="_blank">CodeGarageAfrica</a>
+        </div>
+    </div>
+  </section>
+  <!-- container section end -->
+  <!-- javascripts -->
+  <script src="{% static 'custom-admin/js/jquery.js' %}"></script>
+  <script src="{% static 'custom-admin/js/bootstrap.min.js' %}"></script>
+  <!-- nice scroll -->
+  <script src="{% static 'custom-admin/js/jquery.scrollTo.min.js' %}"></script>
+  <script src="{% static 'custom-admin/js/jquery.nicescroll.js' %}" type="text/javascript"></script>
+  <!-- pnotify -->
+  <script src="{% static 'custom-admin/assets/pnotify/pnotify.custom.js' %}"></script>
+  
+  {% block scripts %}{% endblock %}
+
+  <!--custome script for all page-->
+  <script src="{% static 'custom-admin/js/scripts.js' %}"></script>
+
+</body>
+
+  {% if err %}
+	<script>
+	(function( $ ) {
+	'use strict';
+	(function() {
+		var notice = new PNotify({
+			title: 'Error',
+			text: '{{err}}',
+			type: 'error',
+			icon: 'fa fa-user',
+			buttons: {
+				sticker: false
+			}
+		});
+		notice.get().click(function() {
+			notice.remove();
+		});
+	})();
+	}).apply( this, [ jQuery ]);
+	</script>
+	{% endif %}
+
+	{% if messages %}
+	{% for message in messages %}
+	<script>
+	(function( $ ) {
+	'use strict';
+	(function() {
+		var notice = new PNotify({
+			title: '{{message.tags.title}}',
+			text: '{{message}}',
+			type: '{{message.tags}}',
+      icon: 'fa fa-user',
+			buttons: {
+				sticker: false
+			}
+		});
+		notice.get().click(function() {
+			notice.remove();
+		});
+	})();
+	}).apply( this, [ jQuery ]);
+	</script>
+	{% endfor %}
+	{% endif %}
+
+</html>

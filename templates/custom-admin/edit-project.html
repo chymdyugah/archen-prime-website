@@ -1,0 +1,267 @@
+{% extends 'custom-admin/base.html' %}
+{% load static %}
+{% block title %}
+<title>Register Item - LASPPPA</title>
+{% endblock %}
+{% block css %}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+
+  {% block body %}
+  <section id="main-content">
+    <section class="wrapper">
+      <div class="row">
+        <div class="col-lg-12">
+          <h3 class="page-header"><i class="icon_document_alt"></i> Edit Project</h3>
+          <ol class="breadcrumb">
+            <li><i class="fa fa-home"></i><a href="{% url 'all_projects' %}">Home</a></li>
+            <li><i class="icon_document_alt"></i>Edit Project</li>
+            <!-- <li></i>Corporate</li> -->
+          </ol>
+        </div>
+      </div>
+      <!-- Item Registration -->
+      <div class="row">
+        <div class="col-lg-12">
+          <section class="panel">
+            <header class="panel-heading">
+              Add Project
+            </header>
+            <div class="panel-body">
+              <div class="form">
+                <form class="form-validate form-horizontal" id="feedback_form" method="post" action="" enctype="multipart/form-data">
+                  {% csrf_token %}
+                    <div class="form-group ">
+                      <div class="col-lg-2">
+                        <label for="pname" class="control-label">Project Name<span class="required">*</span></label>
+                      </div>
+                      <div class="col-lg-6">
+                        <input class="form-control" id="pname" name="name" minlength="1" type="text" placeholder="Project title" value="{{project.name}}" autocomplete="off" required />
+                      </div>
+                    </div>
+
+                    <div class="form-group ">
+                      <div class="col-lg-2">
+                        <label for="client" class="control-label">Client<span class="required">*</span></label>
+                      </div>
+                      <div class="col-lg-6">
+                        <input class="form-control" id="client" name="client" minlength="1" type="text" placeholder="Client Name" value="{{project.client}}" autocomplete="off" required />
+                      </div>
+                    </div>
+                  
+                    <div class="form-group ">
+                      <div class="col-lg-2">
+                        <label for="description" class="control-label">Description<span class="required">*</span></label>
+                      </div>
+                      <div class="col-lg-6">
+                        <textarea class="form-control" id="description" name="description" minlength="1" type="text" placeholder="Project title" autocomplete="off" required>{{project.description}}</textarea>
+                      </div>
+                    </div>
+
+                    <div class="form-group ">
+                      <div class="col-lg-2">
+                        <label for="date" class="control-label">Date<span class="required">*</span></label>
+                      </div>
+                      <div class="col-lg-6">
+                        <input class="form-control" id="date" name="project_date" minlength="1" type="date" placeholder="Date" value="{{project.project_date|date:'Y-m-d'}}" autocomplete="off" required />
+                      </div>
+                    </div>
+                  
+                    <div class="form-group ">
+                      <div class="col-lg-2">
+                        <label for='tags' class='control-label'>Tags <span class='required'>*</span></label>
+                      </div>
+                      <div class='col-lg-6'>
+                        <select class='form-control selectMultiple' name='tags' id="tags" multiple required >
+                          <option value='real-estate' {% if 'real-estate' in project.tags %} selected {% endif %}>Real Estate</option>
+                          <option value='construction' {% if 'construction' in project.tags %} selected {% endif %}>Construction</option>
+                          <option value='consultancy' {% if 'consultancy' in project.tags %} selected {% endif %}>Consultancy</option>
+                        </select>
+                      </div>
+                    </div>
+                    
+                    <div class="form-group ">
+                      <div class="col-lg-6">
+                        <input id="cover" name="cover" type="file" accept="image/*" />
+                      </div>
+                    </div>
+
+                  <div class="form-group">
+                    <div class="col-lg-12">
+                      <button class="btn btn-primary" type="submit" name="submit">Save</button>
+                      <button class="btn btn-default" type="button">Cancel</button>
+                      <button class="btn btn-danger" type="submit" name="submit" formaction="{% url 'delete_project' project.project_key %}" form="delete_form">Delete</button>
+                    </div>
+                  </div>
+                </form>
+                      <form id="delete_form" method="post">
+                        {% csrf_token %}
+                      </form>
+              </div>
+
+            </div>
+          </section>
+        </div>
+      </div>
+
+      
+      <div class="row">
+        <!-- chart morris start -->
+        <!-- Bar -->
+        <div class="col-lg-12">
+          <section class="panel">
+              <header class="panel-heading">
+                  Images
+              </header>
+              <div class="panel-body text-center">
+                <form class="form-validate form-horizontal" id="feedback_form" method="post" action="{% url 'add_image' project.project_key %}" enctype="multipart/form-data">
+                  {% csrf_token %}
+                    
+                  <div class="form-group ">
+                    <div class="col-lg-6">
+                      <input id="cover" name="image" type="file" accept="image/*" multiple required />
+                    </div>
+                    <div class="col-lg-6">
+                      <button class="btn btn-primary" type="submit" name="submit">Save</button>
+                      <button class="btn btn-default" type="button">Cancel</button>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <!-- <div class="col-lg-12">
+                      <button class="btn btn-primary" type="submit" name="submit">Save</button>
+                      <button class="btn btn-default" type="button">Cancel</button>
+                    </div> -->
+                  </div>
+                </form>
+                <div class="container-fluid">
+                  <div class="row">
+
+                    {% for image in images %}
+                    <div class="col-md-4 project-cards">
+                      <div class="thumbnail">
+                        <img src="{{ image.image.url }}" alt="Lights" style="width:100%">
+                        <div class="caption">
+                          <a href="#"><i class="icon_trash_alt"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+                  
+                  {% if paginated %}
+                  <ul class="pagination pagination-md justify-content-end" style="margin:20px 0">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Prev</a></li>
+                    {% endif %}
+                    <li class="page-item  disabled"><a class="page-link" href="#">{{ page_obj.number }}</a></li>
+                    {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a></li>
+                    {% endif %}
+                  </ul>
+                  {% endif %}
+                </div>
+              </div>
+          </section>
+      </div>
+      </div>
+      <!-- page end-->
+    </section>
+  </section>
+  {% endblock %}
+
+  {% block scripts %}
+  <!-- jquery validate js -->
+  <script type="text/javascript" src="{% static 'custom-admin/js/jquery.validate.min.js' %}"></script>
+
+  <!-- custom form validation script for this page-->
+  <script src="{% static 'custom-admin/js/form-validation-script.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+  <!-- get local governments in Lagos state -->
+  <script src="{% static 'custom-admin/js/states.js' %}"></script>
+  <script>
+    let lgas = Province.getLocalGovtByName('Lagos State');
+    let select = $('#lga');
+    $.each(lgas, function(i, item){
+      select.append("<option value='" + item.name.toLowerCase() + "'>" + item.name + "</option>")
+    });
+  </script>
+  <script>
+    let v = 0;
+    $('#new_building').click(function(){
+      v++;
+      var n = "<div class='my_group'><div class='col-lg-12'><div class='row'><div class='col-lg-3'><label for='use' class='control-label'>Type of Use <span class='required'>*</span></label><select class='form-control selectMultiple' name='use"+v+"' multiple required ><option value='residential'>Residential</option><option value='shops/mall'>Shops/Mall</option><option value='hospitality'>Hospitality</option><option value='education'>Education</option><option value='institutional'>Institutional</option><option value='hospital'>Hospital</option><option value='office'>Office</option><option value='recreation'>Recreation</option><option value='club'>Club</option></select></div><div class='col-lg-2'><label for='floors' class='control-label'>Floors <span class='required'>*</span></label><input class='form-control ' type='number' name='floors"+v+"' required /></div><div class='col-lg-3'><label for='unit_type' class='control-label'>Type of Units <span class='required'>*</span></label><select class='form-control selectMultiple' name='unit_type"+v+"' required multiple ><option value='flat'>Flat</option><option value='detached'>Detached</option><option value='semi-detached'>Semi-Detached</option><option value='maisonette'>Maisonette</option><option value='bungalow'>Bungalow</option><option value='terrace'>Terrace</option></select></div><div class='col-lg-3'><label for='units' class='control-label'>Units <span class='required'>*</span></label><input class='form-control ' type='number' name='units"+v+"' required /></div><div class='col-lg-1'><label class='control-label'><span class='required'>remove</span></label><button type='button' class='btn btn-sm btn-danger close-building'><span class='icon_close_alt'></span></button></div></div></div></div>";
+      var group = $('#grp')
+      group.append(n);
+      $('.selectMultiple').select2({
+        closeOnSelect: false
+      });
+      $('.close-building').on('click', function() {
+        var group = $(this).parent().parent();
+        group.remove();
+      });
+    });
+  </script>
+  <script>
+    let y = 0;
+    $('#new_professional').click(function(){
+      y++;
+      var n = '<div class="col-lg-12"><div class="row">\
+        <div class="col-lg-3">\
+          <label for="professional_name" class="control-label">Professional\'s Name</label>\
+          <input class="form-control " id="professional_name" type="tel" name="professional_name'+y+'" />\
+        </div>\
+\
+        <div class="col-lg-2">\
+            <label for="professional_type" class="control-label">Type of Professional<span class="required">*</span></label>\
+            <select class="selectMultiple form-control " name="professional_type'+y+'" multiple required>\
+              <option value="architect">Architect</option>\
+              <option value="structural">Structural Eng</option>\
+              <option value="electrical">Electrical Eng</option>\
+              <option value="mechanical">Mechanical Engitect</option>\
+              <option value="geologist">Geologist</option>\
+            </select>\
+        </div>\
+\
+        <div class="col-lg-2">\
+            <label for="professional_address" class="control-label">Address of Professional</label>\
+            <textarea class="form-control " id="professional_address" name="professional_address'+y+'"></textarea>\
+        </div>\
+\
+        <div class="col-lg-2">\
+          <label for="professional_phone" class="control-label">Professionals Phone</label>\
+          <input class="form-control " id="professional_phone" type="tel" name="professional_phone'+y+'" />\
+        </div>\
+\
+        <div class="col-lg-2">\
+            <label for="professional_reg" class="control-label">Professionals Reg No.</label>\
+            <input class="form-control " id="professional_reg" type="text" name="professional_reg'+y+'" />\
+        </div>\
+\
+        <div class="col-lg-1">\
+          <label class="control-label"><span class="required">remove</span></label>\
+          <button type="button" class="btn btn-sm btn-danger delete-professional">\
+            <span class="icon_close_alt"></span>\
+          </button>\
+        </div>\
+      </div></div>';
+      var group = $('#professional_grp')
+      group.append(n);
+      $('.selectMultiple').select2({
+        closeOnSelect: false
+      });
+      $('.delete-professional').on('click', function() {
+        var group = $(this).parent().parent();
+        group.remove();
+      });
+    });
+  </script>
+  <script>
+    $('.selectMultiple').select2({
+      closeOnSelect: false
+    });
+  </script>
+  {% endblock %}

@@ -1,0 +1,226 @@
+  {% extends 'custom-admin/base.html' %}
+  {% block title %}
+  <title>Dashboard - LASPPPA</title>
+  {% endblock %}
+
+  {% load static %}
+  
+  {% block body %}
+  <section id="main-content">
+    <section class="wrapper">
+      <!--overview start-->
+      <div class="row">
+        <div class="col-lg-12">
+          <h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
+          <ol class="breadcrumb">
+            <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+            <li><i class="fa fa-laptop"></i>Dashboard</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+          <div class="info-box blue-bg">
+            <i class="fa fa-cloud-download"></i>
+            <div class="count">{{ total }}</div>
+            <div class="title">Records</div>
+          </div>
+          <!--/.info-box-->
+        </div>
+        <!--/.col-->
+
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+          <div class="info-box brown-bg">
+            <i class="fa fa-shopping-cart"></i>
+            <div class="count">{{ individuals }}</div>
+            <div class="title">Individual owned</div>
+          </div>
+          <!--/.info-box-->
+        </div>
+        <!--/.col-->
+
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+          <div class="info-box dark-bg">
+            <i class="fa fa-thumbs-o-up"></i>
+            <div class="count">{{ corporate }}</div>
+            <div class="title">Corporate owned</div>
+          </div>
+          <!--/.info-box-->
+        </div>
+        <!--/.col-->
+
+      </div>
+      <!--/.row-->
+
+      <div class="row">
+        <!-- chart morris start -->
+        <!-- Bar -->
+        <div class="col-lg-12">
+          <section class="panel">
+              <header class="panel-heading">
+                  Projects
+              </header>
+              <div class="panel-body text-center">
+                <div class="container-fluid">
+                  <div class="row">
+
+                    {% for project in page_obj %}
+                    <!-- <div class="col-md-4 project-cards">
+                      <a href="{% url 'single_project' project.project_key %}">
+                      <div class="card" style="width:400px">
+                        <img class="card-img-top" src="{{ project.cover_image.url }}" alt="Card image" style="width:100%">
+                        <div class="card-body">
+                          <h4 class="card-title">{{ project.name}}</h4>
+                        </div>
+                      </div>
+                      </a>
+                    </div> -->
+                    <div class="col-md-4 project-cards">
+                        <div class="thumbnail">
+                          <a href="{% url 'edit_project' project.project_key %}">
+                            <img src="{{ project.cover_image.url }}" class="img-fluid" alt="Lights" style="width:100%">
+                            <div class="caption">
+                              <p>{{ project.name}}</p>
+                              
+                            </div>
+                          </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <!-- <div class="col-md-4 project-cards">
+                      <a href="#">
+                        <div class="thumbnail">
+                          <a href="{% static 'assets/img/img-1.jpg' %}" target="_blank">
+                            <img src="{% static 'assets/img/img-1.jpg' %}" class="img-fluid" alt="Lights" style="width:100%">
+                            <div class="caption">
+                              <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
+                            </div>
+                          </a>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="col-md-4 project-cards">
+                      <a href="#">
+                        <div class="thumbnail">
+                          <a href="http://localhost:8000/media/real-estate-images/Screenshot_2024-02-28_at_10.49.46PM_1.png" target="_blank">
+                            <img src="http://localhost:8000/media/real-estate-images/Screenshot_2024-02-28_at_10.49.46PM_1.png" class="img-fluid" alt="Lights" style="width:100%">
+                            <div class="caption">
+                              <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
+                            </div>
+                          </a>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="col-md-4 project-cards">
+                      <a href="#">
+                        <div class="thumbnail">
+                          <a href="{% static 'assets/img/img-1.jpg' %}" target="_blank">
+                            <img src="{% static 'assets/img/img-1.jpg' %}" class="img-fluid" alt="Lights" style="width:100%">
+                            <div class="caption">
+                              <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
+                            </div>
+                          </a>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="col-md-4 project-cards">
+                      <a href="#">
+                        <div class="thumbnail">
+                          <a href="{% static 'assets/img/img-1.jpg' %}" target="_blank">
+                            <img src="{% static 'assets/img/img-1.jpg' %}" class="img-fluid" alt="Lights" style="width:100%">
+                            <div class="caption">
+                              <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
+                            </div>
+                          </a>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="col-md-4 project-cards">
+                      <a href="#">
+                        <div class="thumbnail">
+                          <a href="{% static 'assets/img/img-1.jpg' %}" target="_blank">
+                            <img src="{% static 'assets/img/img-1.jpg' %}" class="img-fluid" alt="Lights" style="width:100%">
+                            <div class="caption">
+                              <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
+                            </div>
+                          </a>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="col-md-4 project-cards">
+                      <a href="#">
+                        <div class="thumbnail">
+                          <a href="{% static 'assets/img/img-1.jpg' %}" target="_blank">
+                            <img src="{% static 'assets/img/img-1.jpg' %}" class="img-fluid" alt="Lights" style="width:100%">
+                            <div class="caption">
+                              <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
+                            </div>
+                          </a>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="col-md-4 project-cards">
+                      <a href="#">
+                        <div class="thumbnail">
+                          <a href="{% static 'assets/img/img-1.jpg' %}" target="_blank">
+                            <img src="{% static 'assets/img/img-1.jpg' %}" class="img-fluid" alt="Lights" style="width:100%">
+                            <div class="caption">
+                              <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
+                            </div>
+                          </a>
+                        </div>
+                      </a>
+                    </div> -->
+                  </div>
+                  
+                  {% if paginated %}
+                  <ul class="pagination pagination-md justify-content-end" style="margin:20px 0">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Prev</a></li>
+                    {% endif %}
+                    <li class="page-item  disabled"><a class="page-link" href="#">{{ page_obj.number }}</a></li>
+                    {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a></li>
+                    {% endif %}
+                  </ul>
+                  {% endif %}
+                </div>
+              </div>
+          </section>
+      </div>
+      </div>
+      <!-- chart morris start -->
+    </section>
+  </section>
+  {% endblock %}
+  
+  {% block scripts %}
+   <!-- chartjs -->
+   <script src="{% static 'assets/chart-master/Chart.js' %}"></script>
+   <script>
+    $(document).ready(function() {
+    $.get("{% url 'home' %}", function(data, status){
+      console.log(data);
+        var barChartData = {
+            // labels : ["January","February","March","April","May","June","July", "August", "September","October","November","December"],
+            labels : data['lgas'],
+            datasets : [
+                {
+                    fillColor : "rgba(220,220,220,0.5)",
+                    strokeColor : "rgba(220,220,220,1)",
+                    data : data['lga_count']
+                    // data : [10, 30, 1, 4, 15, 5, 25, 30, 24, 26, 11, 16]
+                }
+            ]
+    
+        };
+    
+        new Chart(document.getElementById("bar").getContext("2d")).Bar(barChartData, {responsive : true, maintainAspectRatio: true, datasetFill:false});    
+    });
+
+});
+   </script>
+  {% endblock %}
