@@ -86,6 +86,7 @@ class LoginView(LV):
             if user.is_active:
                 login(request, user)
                 user.last_login = timezone.now()
+                user.save()
                 if request.GET.get('next') is not None:
                     return HttpResponseRedirect(request.GET['next'])
                 
