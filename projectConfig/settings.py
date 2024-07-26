@@ -22,10 +22,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-+4p&@6+gw9_1xe9d-wak&1o6$$84yqfz-b8_ky^uhs&3_j&+a-'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = ['*']
 
@@ -81,8 +81,12 @@ WSGI_APPLICATION = 'projectConfig.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': config('ENGINE'),
+        'NAME': config('NAME'),
+        'USER': config('USER'),
+        'PASSWORD': config('PASSWORD'),
+        'HOST': config('HOST'),
+        'PORT': config('PORT'),
     }
 }
 
@@ -138,14 +142,14 @@ AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 AWS_QUERYSTRING_AUTH = False
 AWS_S3_FILE_OVERWRITE = False
 
-# STORAGES = {
-#     'default': {
-#         'BACKEND': 'projectConfig.storages.MediaStorage',
-#     },
-#     'staticfiles': {
-#         'BACKEND': 'projectConfig.storages.StaticStorage',
-#     },
-# }
+STORAGES = {
+    'default': {
+        'BACKEND': 'projectConfig.storages.MediaStorage',
+    },
+    'staticfiles': {
+        'BACKEND': 'projectConfig.storages.StaticStorage',
+    },
+}
 
 CORS_ALLOW_ALL_ORIGINS = True
 LOGIN_URL = '/login/'
