@@ -154,4 +154,4 @@ STORAGES = {
 CORS_ALLOW_ALL_ORIGINS = True
 LOGIN_URL = '/login/'
 
-django_heroku.settings(locals())
+django_heroku.settings(locals(), staticfiles=False)
