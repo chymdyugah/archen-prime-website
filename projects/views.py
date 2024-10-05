@@ -37,19 +37,16 @@ class ProjectsView(ListView):
                     'details': 'At Archen Prime Limited, our real estate services are all about creating vibrant and sustainable communities. Whether you’re looking to develop a new property, manage an existing one, or invest in real estate, we’re here to guide you every step of the way. Our dedicated team is passionate about transforming spaces into thriving environments where people can live, work, and thrive. We take pride in offering innovative solutions that meet the highest standards of quality and sustainability.',
                     'icon': 'ri-community-line',
                     'image': 'img-1.jpg',
-                    'title': 'Real Estate',
                 },
                 'consultancy': {
                     'details': 'At Archen Prime Limited, we believe that great design makes life better. Our design and consultancy services cover everything from architectural and interior design to comprehensive project management. We work closely with you to understand your needs and preferences, creating spaces that are not only stunning but also functional and eco-friendly. Our creative designers and experienced consultants are dedicated to bringing your vision to life, ensuring that every detail is just right.',
                     'icon': 'ri-user-2-line',
                     'image': 'consultancy-1.jpg',
-                    'title': 'Design & Consultancy',
                 },
                 'construction': {
                     'details': 'Building dreams is at the heart of what we do at Archen Prime Limited. From constructing new homes and commercial spaces to renovating and remodeling existing ones, we bring precision and excellence to every project. Our experienced professionals use the latest techniques and materials to create structures that are not only beautiful but also built to last. We focus on sustainability and durability, ensuring that each project stands the test of time while reflecting your unique vision.',
                     'icon': 'ri-hammer-line',
                     'image': 'construction-1.jpg',
-                    'title': 'Construction',
                 }
             }
             tag:str = kwargs['tag']
