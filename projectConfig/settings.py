@@ -142,14 +142,14 @@ AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 AWS_QUERYSTRING_AUTH = False
 AWS_S3_FILE_OVERWRITE = False
 
-STORAGES = {
-    'default': {
-        'BACKEND': 'projectConfig.storages.MediaStorage',
-    },
-    'staticfiles': {
-        'BACKEND': 'projectConfig.storages.StaticStorage',
-    },
-}
+# STORAGES = {
+#     'default': {
+#         'BACKEND': 'projectConfig.storages.MediaStorage',
+#     },
+#     'staticfiles': {
+#         'BACKEND': 'projectConfig.storages.StaticStorage',
+#     },
+# }
 
 CORS_ALLOW_ALL_ORIGINS = True
 LOGIN_URL = '/login/'

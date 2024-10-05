@@ -25,14 +25,14 @@ urlpatterns = [
     path('', views.HomeView.as_view(), name='home'),
     path('projects/<str:tag>/', views.ProjectsView.as_view(), name='projects'),
     path('single-project/<uuid:key>/', views.ViewProjectView.as_view(), name='single_project'),
-    path('login/', views.LoginView.as_view(), name='login'),
-    path('logout/', views.LogoutView.as_view(), name='logout'),
-    path('add-project/', views.AddProjectView.as_view(), name='add_project'),
-    path('all-projects/', views.AllProjectsView.as_view(), name='all_projects'),
-    path('edit-project/<uuid:key>/', views.EditProjectView.as_view(), name='edit_project'),
-    path('add-image/<uuid:key>/', views.AddImageView.as_view(), name='add_image'),
-    path('delete-image/<int:pk>/', views.DeleteImageView.as_view(), name='delete_image'),
-    path('delete-project/<uuid:key>/', views.DeleteProjectView.as_view(), name='delete_project'),
+    # path('login/', views.LoginView.as_view(), name='login'),
+    # path('logout/', views.LogoutView.as_view(), name='logout'),
+    # path('add-project/', views.AddProjectView.as_view(), name='add_project'),
+    # path('all-projects/', views.AllProjectsView.as_view(), name='all_projects'),
+    # path('edit-project/<uuid:key>/', views.EditProjectView.as_view(), name='edit_project'),
+    # path('add-image/<uuid:key>/', views.AddImageView.as_view(), name='add_image'),
+    # path('delete-image/<int:pk>/', views.DeleteImageView.as_view(), name='delete_image'),
+    # path('delete-project/<uuid:key>/', views.DeleteProjectView.as_view(), name='delete_project'),
 ]
 
 if settings.DEBUG:
